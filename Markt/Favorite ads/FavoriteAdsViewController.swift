@@ -18,7 +18,11 @@ class FavoriteAdsViewController: UIViewController {
         
         navigationItem.title = NSLocalizedString("Favorite ads", comment: "")
         
-        textLabel.font = UIFont.systemFont(ofSize: 16)
+        textLabel.adjustsFontForContentSizeCategory = true
+        
+        let bodyFont = UIFont.systemFont(ofSize: 16)
+        let bodyFontMetrics = UIFontMetrics(forTextStyle: .body)
+        textLabel.font = bodyFontMetrics.scaledFont(for: bodyFont)
     }
     
     override func viewWillAppear(_ animated: Bool) {
