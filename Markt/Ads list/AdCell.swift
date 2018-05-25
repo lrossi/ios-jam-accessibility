@@ -44,9 +44,15 @@ class AdCell: UICollectionViewCell {
     }
     
     private func setupLabels() {
+        titleLabel.adjustsFontForContentSizeCategory = true
+        priceLabel.adjustsFontForContentSizeCategory = true
+        
         let calloutFont = UIFont.systemFont(ofSize: 12)
-        titleLabel.font = calloutFont
-        priceLabel.font = calloutFont
+        let calloutFontMetrics = UIFontMetrics(forTextStyle: .callout)
+        let calloutScaledFont = calloutFontMetrics.scaledFont(for: calloutFont)
+        
+        titleLabel.font = calloutScaledFont
+        priceLabel.font = calloutScaledFont
     }
     
     override func prepareForReuse() {

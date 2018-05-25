@@ -43,12 +43,22 @@ class AdsListViewController: UICollectionViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         definesPresentationContext = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(contentSizeCategoryDidChange), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         collectionView?.reloadData()
+    }
+    
+    @objc private func contentSizeCategoryDidChange() {
+        collectionViewLayout.invalidateLayout()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
