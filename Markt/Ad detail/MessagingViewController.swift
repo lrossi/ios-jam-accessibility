@@ -16,4 +16,9 @@ class MessagingViewController: UIViewController {
         
         title = NSLocalizedString("Send message", comment: "")
     }
+    
+    override func accessibilityPerformEscape() -> Bool {
+        performSegue(withIdentifier: dismissSegue, sender: self)
+        return true
+    }
 }
