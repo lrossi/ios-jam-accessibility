@@ -15,7 +15,19 @@ class InfoView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        textLabel.adjustsFontForContentSizeCategory = true
+        
+        let bodyFont = UIFont.systemFont(ofSize: 16)
+        let bodyFontMetrics = UIFontMetrics(forTextStyle: .body)
+        textLabel.font = bodyFontMetrics.scaledFont(for: bodyFont)
+    
         updateTransparency()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTransparency), name: Notification.Name.UIAccessibilityReduceTransparencyStatusDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIAccessibilityReduceTransparencyStatusDidChange, object: nil)
     }
     
     @objc private func updateTransparency() {
