@@ -74,6 +74,11 @@ class AdsListViewController: UICollectionViewController {
                 return
             }
             ad.isFavorite = !ad.isFavorite
+            
+            guard let cell = self?.collectionView?.cellForItem(at: indexPath) as? AdCell else {
+                return
+            }
+            cell.updateAccessibility(for: ad)
         }
         
         return cell

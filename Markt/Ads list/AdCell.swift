@@ -68,8 +68,25 @@ class AdCell: UICollectionViewCell {
     
     func updateAccessibility(for ad: Ad) {
         let image = NSLocalizedString("1 image", comment: "")
-        let adFeatures = [ad.title, ad.priceStringValue, ad.location, image]
+        var adFeatures = [ad.title, ad.priceStringValue, ad.location, image]
+        let favoriteActionName: String
+        
+        if ad.isFavorite {
+            adFeatures.append(NSLocalizedString("favorite", comment: ""))
+            favoriteActionName = NSLocalizedString("Remove from favorites", comment: "")
+        } else {
+            favoriteActionName = NSLocalizedString("Add to favorites", comment: "")
+        }
+        
         accessibilityLabel = adFeatures.joined(separator: ", ")
+        
+        let toggleFavoriteStatusAction = UIAccessibilityCustomAction(name: favoriteActionName, target: self, selector: #selector(accessibilityToggleFavoriteStatus))
+        accessibilityCustomActions = [toggleFavoriteStatusAction]
+    }
+    
+    @objc private func accessibilityToggleFavoriteStatus() -> Bool {
+        toggleFavoriteStatus()
+        return true
     }
     
     @IBAction private func toggleFavoriteStatus() {
