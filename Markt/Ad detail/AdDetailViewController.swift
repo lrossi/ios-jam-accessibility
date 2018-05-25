@@ -29,6 +29,7 @@ class AdDetailViewController: UIViewController {
         setupLabels()
         
         imageView.image = ad?.image
+        imageView.accessibilityIgnoresInvertColors = true
         titleLabel.text = ad?.title
         priceLabel.text = ad?.priceStringValue
         if let location = ad?.location, let insertionDate = ad?.insertionDateStringValue {

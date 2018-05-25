@@ -25,6 +25,7 @@ class AdCell: UICollectionViewCell {
         let cornerRadius: CGFloat = 4
         
         imageView.layer.cornerRadius = cornerRadius
+        imageView.accessibilityIgnoresInvertColors = true
         
         layer.cornerRadius = cornerRadius
         layer.borderWidth = 1
