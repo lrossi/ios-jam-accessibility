@@ -52,20 +52,38 @@ class AdDetailViewController: UIViewController {
     }
     
     private func setupLabels() {
+        titleLabel.adjustsFontForContentSizeCategory = true
+        priceLabel.adjustsFontForContentSizeCategory = true
+        descriptionLabel.adjustsFontForContentSizeCategory = true
+        infoLabel.adjustsFontForContentSizeCategory = true
+        authorLabel.adjustsFontForContentSizeCategory = true
+        identifierLabel.adjustsFontForContentSizeCategory = true
+        contactLabel.adjustsFontForContentSizeCategory = true
+        
         let headlineFont = UIFont.boldSystemFont(ofSize: 17)
-        titleLabel.font = headlineFont
-        priceLabel.font = headlineFont
-        contactLabel.font = headlineFont
+        let headlineFontMetrics = UIFontMetrics(forTextStyle: .headline)
+        let headlineScaledFont = headlineFontMetrics.scaledFont(for: headlineFont)
+        
+        titleLabel.font = headlineScaledFont
+        priceLabel.font = headlineScaledFont
+        contactLabel.font = headlineScaledFont
         
         let caption1Font = UIFont.systemFont(ofSize: 15)
-        infoLabel.font = caption1Font
-        authorLabel.font = caption1Font
+        let caption1FontMetrics = UIFontMetrics(forTextStyle: .caption1)
+        let captionScaledFont = caption1FontMetrics.scaledFont(for: caption1Font)
+        
+        infoLabel.font = captionScaledFont
+        authorLabel.font = captionScaledFont
         
         let bodyFont = UIFont.systemFont(ofSize: 17)
-        descriptionLabel.font = bodyFont
+        let bodyFontMetrics = UIFontMetrics(forTextStyle: .body)
+        let bodyScaledFont = bodyFontMetrics.scaledFont(for: bodyFont)
+        
+        descriptionLabel.font = bodyScaledFont
         
         let caption2Font = UIFont.systemFont(ofSize: 13)
-        identifierLabel.font = caption2Font
+        let caption2FontMetrics = UIFontMetrics(forTextStyle: .caption2)
+        identifierLabel.font = caption2FontMetrics.scaledFont(for: caption2Font)
     }
     
     override func accessibilityPerformMagicTap() -> Bool {
