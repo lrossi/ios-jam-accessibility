@@ -68,6 +68,11 @@ class AdDetailViewController: UIViewController {
         identifierLabel.font = caption2Font
     }
     
+    override func accessibilityPerformMagicTap() -> Bool {
+        openContact()
+        return true
+    }
+    
     func updateFavoriteStatusButton() {
         guard let ad = ad else {
             return
