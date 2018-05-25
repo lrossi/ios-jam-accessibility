@@ -15,7 +15,17 @@ class InfoView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        textLabel.font = UIFont.systemFont(ofSize: 16)
+        updateTransparency()
+    }
+    
+    @objc private func updateTransparency() {
+        if UIAccessibilityIsReduceTransparencyEnabled() {
+            transparencyView.isHidden = true
+            backgroundColor = UIColor(white: 0.94, alpha: 1)
+        } else {
+            transparencyView.isHidden = false
+            backgroundColor = UIColor(white: 0.34, alpha: 0.23)
+        }
     }
     
     func confugure(for text: String) {
