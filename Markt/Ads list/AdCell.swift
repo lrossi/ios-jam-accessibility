@@ -34,6 +34,9 @@ class AdCell: UICollectionViewCell {
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         layer.shadowRadius = cornerRadius
+        
+        isAccessibilityElement = true
+        accessibilityTraits |= UIAccessibilityTraitButton
     }
     
     func setWidth(_ width: CGFloat) {
@@ -59,6 +62,14 @@ class AdCell: UICollectionViewCell {
         titleLabel.text = ad.title
         priceLabel.text = ad.priceStringValue
         toggleFavoriteStatusButton.isSelected = ad.isFavorite
+        
+        updateAccessibility(for: ad)
+    }
+    
+    func updateAccessibility(for ad: Ad) {
+        let image = NSLocalizedString("1 image", comment: "")
+        let adFeatures = [ad.title, ad.priceStringValue, ad.location, image]
+        accessibilityLabel = adFeatures.joined(separator: ", ")
     }
     
     @IBAction private func toggleFavoriteStatus() {
