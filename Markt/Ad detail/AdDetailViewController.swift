@@ -41,6 +41,14 @@ class AdDetailViewController: UIViewController {
         identifierLabel.text = ad?.identifierStringValue
         contactLabel.text = NSLocalizedString("Contact", comment: "")
         updateFavoriteStatusButton()
+        
+        contactLabel.isAccessibilityElement = false
+        contactView.isAccessibilityElement = true
+        contactView.accessibilityLabel = contactLabel.text
+        contactView.accessibilityTraits |= UIAccessibilityTraitButton
+        
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityLabel = NSLocalizedString("1 image", comment: "")
     }
     
     private func setupLabels() {
@@ -67,6 +75,13 @@ class AdDetailViewController: UIViewController {
         
         let image = ad.isFavorite ? #imageLiteral(resourceName: "filled-small-heart") : #imageLiteral(resourceName: "small-heart")
         let button = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toggleFavoriteStatus))
+        
+        if ad.isFavorite {
+            button.accessibilityLabel = NSLocalizedString("Remove from favorites", comment: "")
+        } else {
+            button.accessibilityLabel = NSLocalizedString("Add to favorites", comment: "")
+        }
+        
         navigationItem.setRightBarButton(button, animated: true)
     }
     
